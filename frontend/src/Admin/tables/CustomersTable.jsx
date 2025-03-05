@@ -59,7 +59,7 @@ const CustomersTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {customers.map(customer => (
+            {Array.isArray(customers) && customers.map(customer => (
               <TableRow hover key={customer._id} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}>
                 <TableCell>
                   <Avatar alt={customer.firstName} src={customer.profilePicture || '/images/avatars/default.png'} />

@@ -41,32 +41,45 @@ async function findUserCart(userId) {
 
 // Add an item to the user's cart
 async function addCartItem(userId, req) {
- 
-  const cart = await Cart.findOne({ user: userId });
-  const product = await Product.findById(req.productId);
+  try {
+    let cart = await Cart.findOne({ user: userId });
+    
+    if (!cart) {
+      cart = await createCart(userId);
+    }
 
-  const isPresent = await CartItem.findOne({ cart: cart._id, product: product._id, userId });
-  
+    const product = await Product.findById(req.productId);
+    if (!product) {
+      throw new Error('Product not found');
+    }
 
-  if (!isPresent) {
-    const cartItem = new CartItem({
-      product: product._id,
-      cart: cart._id,
-      quantity: 1,
+    const isPresent = await CartItem.findOne({ 
+      cart: cart._id, 
+      product: product._id, 
       userId,
-      price: product.discountedPrice,
-      size: req.size,
-      discountedPrice:product.discountedPrice
+      size: req.size 
     });
 
-   
+    if (!isPresent) {
+      const cartItem = new CartItem({
+        product: product._id,
+        cart: cart._id,
+        quantity: 1,
+        userId,
+        price: product.discountedPrice,
+        size: req.size,
+        discountedPrice: product.discountedPrice
+      });
 
-    const createdCartItem = await cartItem.save();
-    cart.cartItems.push(createdCartItem);
-    await cart.save();
+      const createdCartItem = await cartItem.save();
+      cart.cartItems.push(createdCartItem);
+      await cart.save();
+    }
+
+    return 'Item added to cart';
+  } catch (error) {
+    throw new Error(`Failed to add item to cart: ${error.message}`);
   }
-
-  return 'Item added to cart';
 }
 
 module.exports = { createCart, findUserCart, addCartItem };

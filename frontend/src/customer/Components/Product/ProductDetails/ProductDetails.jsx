@@ -29,7 +29,12 @@ export default function ProductDetails() {
     setActiveImage(image);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!jwt) {
+      navigate("/login");
+      return;
+    }
     const data = { productId, size: selectedSize.name };
     dispatch(addItemToCart({ data, jwt }));
     navigate("/cart");
@@ -52,8 +57,21 @@ export default function ProductDetails() {
   ];
 
   const breadcrumbs = [
-    { id: 1, name: product.category, href: `/${product.category.toLowerCase()}` },
-    { id: 2, name: product.subCategory || "Products", href: "#" }
+    { 
+      id: 1, 
+      name: product.topLevelCategory || 'Category', 
+      href: `/${(product.topLevelCategory || '').toLowerCase()}`
+    },
+    { 
+      id: 2, 
+      name: product.secondLevelCategory || 'Subcategory', 
+      href: `/${(product.topLevelCategory || '').toLowerCase()}/${(product.secondLevelCategory || '').toLowerCase()}`
+    },
+    { 
+      id: 3, 
+      name: product.thirdLevelCategory || 'Products', 
+      href: '#'
+    }
   ];
 
   return (
@@ -61,30 +79,30 @@ export default function ProductDetails() {
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            {breadcrumbs.map((breadcrumb) => (
+            {breadcrumbs.map((breadcrumb, index) => (
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
-                  <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
+                  <a 
+                    href={breadcrumb.href} 
+                    className={`mr-2 text-sm font-medium ${index === breadcrumbs.length - 1 ? 'text-gray-500' : 'text-gray-900'}`}
+                  >
                     {breadcrumb.name}
                   </a>
-                  <svg
-                    width={16}
-                    height={20}
-                    viewBox="0 0 16 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    className="h-5 w-4 text-gray-300"
-                  >
-                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                  </svg>
+                  {index < breadcrumbs.length - 1 && (
+                    <svg
+                      width={16}
+                      height={20}
+                      viewBox="0 0 16 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      className="h-5 w-4 text-gray-300"
+                    >
+                      <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                    </svg>
+                  )}
                 </div>
               </li>
             ))}
-            <li className="text-sm">
-              <a href="#" aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                {product.title}
-              </a>
-            </li>
           </ol>
         </nav>
 
@@ -141,7 +159,7 @@ export default function ProductDetails() {
                     precision={0.5}
                     readOnly
                   />
-                  <p className="opacity-60 text-sm">{review.ratings?.length || 0} Ratings</p>
+                  <p className="opacity-60 text-sm">{review.totalReviews || 0} Ratings</p>
                   <p className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
                     {review.reviews?.length || 0} reviews
                   </p>
@@ -157,23 +175,24 @@ export default function ProductDetails() {
                   <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
                     <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
                     <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-10">
-                      {product.sizes?.map((size) => (
+                      {product.sizes?.map((size, index) => (
                         <RadioGroup.Option
-                          key={size}
-                          value={{ name: size }}
+                          key={`size-${index}-${size.name}`}
+                          value={size}
                           className={({ active }) =>
                             classNames(
-                              true
+                              size.quantity > 0
                                 ? "cursor-pointer bg-white text-gray-900 shadow-sm"
                                 : "cursor-not-allowed bg-gray-50 text-gray-200",
                               active ? "ring-1 ring-indigo-500" : "",
                               "group relative flex items-center justify-center rounded-md border py-1 px-1 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
                             )
                           }
+                          disabled={size.quantity === 0}
                         >
                           {({ active, checked }) => (
                             <>
-                              <RadioGroup.Label as="span">{size}</RadioGroup.Label>
+                              <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
                               <span
                                 className={classNames(
                                   active ? "border" : "border-2",
@@ -247,6 +266,9 @@ export default function ProductDetails() {
                   {review.reviews?.map((item) => (
                     <ProductReviewCard key={item._id} item={item} />
                   ))}
+                  {(!review.reviews || review.reviews.length === 0) && (
+                    <p className="text-center text-gray-500">No reviews yet</p>
+                  )}
                 </div>
               </Grid>
 
@@ -259,11 +281,11 @@ export default function ProductDetails() {
                     precision={0.5}
                     readOnly
                   />
-                  <p className="opacity-60">{review.ratings?.length || 0} Ratings</p>
+                  <p className="opacity-60">{review.totalReviews || 0} Ratings</p>
                 </div>
 
                 {[5, 4, 3, 2, 1].map((rating) => {
-                  const count = review.ratings?.filter(r => r.rating === rating).length || 0;
+                  const count = review.ratings?.filter(r => r === rating).length || 0;
                   const percentage = review.ratings?.length ? (count / review.ratings.length) * 100 : 0;
                   
                   return (

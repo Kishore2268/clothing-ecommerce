@@ -44,16 +44,27 @@ async function updateProduct(productId, reqData) {
 
 // Find a product by ID
 async function findProductById(id) {
-  const product = await Product.findById(id).populate("category").exec();
+  try {
+    if (!id || !id.match(/^[0-9a-fA-F]{24}$/)) {
+      throw new Error("Invalid product ID format");
+    }
 
-  if (!product) {
-    throw new Error("Product not found with id " + id);
+    const product = await Product.findById(id);
+
+    if (!product) {
+      throw new Error("Product not found with id " + id);
+    }
+    return product;
+  } catch (error) {
+    if (error.name === 'CastError') {
+      throw new Error("Invalid product ID format");
+    }
+    throw error;
   }
-  return product;
 }
 
 // Get all products with filtering and pagination
-async function getAllProducts(reqQuery) {
+async function getAllProducts(reqQuery = {}) {
   let {
     category,
     color,
@@ -66,10 +77,15 @@ async function getAllProducts(reqQuery) {
     pageNumber,
     pageSize,
   } = reqQuery;
-  (pageSize = pageSize || 10), (pageNumber = pageNumber || 1);
+
+  // Convert pagination parameters to numbers with defaults
+  pageSize = Number(pageSize) || 10;
+  pageNumber = Number(pageNumber) || 0;
+
   let query = Product.find();
 
-  if (category) {
+  // Category filter
+  if (category && category !== 'undefined' && category !== 'null') {
     query = query.or([
       { topLevelCategory: category },
       { secondLevelCategory: category },
@@ -77,26 +93,37 @@ async function getAllProducts(reqQuery) {
     ]);
   }
 
-  if (color) {
-    const colorSet = new Set(color.split(",").map(color => color.trim().toLowerCase()));
-    const colorRegex = colorSet.size > 0 ? new RegExp([...colorSet].join("|"), "i") : null;
-    query = query.where("color").regex(colorRegex);
+  // Color filter
+  if (color && color !== 'undefined' && color !== 'null') {
+    const colors = color.split(",").map(c => c.trim()).filter(c => c && c !== 'undefined' && c !== 'null');
+    if (colors.length > 0) {
+      query = query.where("color").in(colors);
+    }
   }
 
-  if (sizes) {
-    const sizesSet = new Set(sizes);
-    query = query.where("sizes.name").in([...sizesSet]);
+  // Size filter
+  if (sizes && sizes !== 'undefined' && sizes !== 'null') {
+    const sizeArray = sizes.split(",").map(s => s.trim()).filter(s => s && s !== 'undefined' && s !== 'null');
+    if (sizeArray.length > 0) {
+      query = query.where("sizes.name").in(sizeArray);
+    }
   }
 
-  if (minPrice && maxPrice) {
-    query = query.where("discountedPrice").gte(minPrice).lte(maxPrice);
+  // Price filter
+  if (minPrice && minPrice !== 'undefined' && minPrice !== 'null') {
+    query = query.where("discountedPrice").gte(Number(minPrice));
+  }
+  if (maxPrice && maxPrice !== 'undefined' && maxPrice !== 'null') {
+    query = query.where("discountedPrice").lte(Number(maxPrice));
   }
 
-  if (minDiscount) {
-    query = query.where("discountPercent").gt(minDiscount);
+  // Discount filter
+  if (minDiscount && minDiscount !== 'undefined' && minDiscount !== 'null') {
+    query = query.where("discountPercent").gte(Number(minDiscount));
   }
 
-  if (stock) {
+  // Stock filter
+  if (stock && stock !== 'undefined' && stock !== 'null' && stock !== "All") {
     if (stock === "in_stock") {
       query = query.where("quantity").gt(0);
     } else if (stock === "out_of_stock") {
@@ -104,19 +131,29 @@ async function getAllProducts(reqQuery) {
     }
   }
 
-  if (sort) {
+  // Sorting
+  if (sort && sort !== 'undefined' && sort !== 'null') {
     const sortDirection = sort === "price_high" ? -1 : 1;
     query = query.sort({ discountedPrice: sortDirection });
   }
 
-  // Apply pagination
+  // Count total products before pagination
   const totalProducts = await Product.countDocuments(query);
-  const skip = (pageNumber - 1) * pageSize;
+
+  // Apply pagination
+  const skip = pageNumber * pageSize;
   query = query.skip(skip).limit(pageSize);
+
+  // Execute query
   const products = await query.exec();
   const totalPages = Math.ceil(totalProducts / pageSize);
 
-  return { content: products, currentPage: pageNumber, totalPages: totalPages };
+  return {
+    content: products,
+    currentPage: pageNumber,
+    totalPages: totalPages,
+    totalElements: totalProducts
+  };
 }
 
 async function createMultipleProduct(products) {

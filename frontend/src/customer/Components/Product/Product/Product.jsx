@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useMemo } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
@@ -47,18 +47,43 @@ export default function Product() {
     setIsLoaderOpen(false);
   };
 
-  // const filter = decodeURIComponent(location.search);
-  const decodedQueryString = decodeURIComponent(location.search);
-  const searchParams = new URLSearchParams(decodedQueryString);
-  const colorValue = searchParams.get("color");
-  const sizeValue = searchParams.get("size");
-  const price = searchParams.get("price");
-  const disccount = searchParams.get("disccout");
-  const sortValue = searchParams.get("sort");
-  const pageNumber = searchParams.get("page") || 1;
-  const stock = searchParams.get("stock");
+  // Memoize URL parameters to prevent unnecessary re-renders
+  const urlParams = useMemo(() => {
+    const decodedQueryString = decodeURIComponent(location.search);
+    const searchParams = new URLSearchParams(decodedQueryString);
+    return {
+      colorValue: searchParams.get("color"),
+      sizeValue: searchParams.get("size"),
+      price: searchParams.get("price"),
+      disccount: searchParams.get("disccout"),
+      sortValue: searchParams.get("sort"),
+      pageNumber: searchParams.get("page") || 1,
+      stock: searchParams.get("stock"),
+    };
+  }, [location.search]);
 
-  // console.log("location - ", colorValue, sizeValue,price,disccount);
+  // Use memoized data object for API call
+  const apiData = useMemo(() => {
+    const [minPrice, maxPrice] =
+      urlParams.price === null ? [0, 0] : urlParams.price.split("-").map(Number);
+    
+    return {
+      category: param.lavelThree,
+      colors: urlParams.colorValue || [],
+      sizes: urlParams.sizeValue || [],
+      minPrice: minPrice || 0,
+      maxPrice: maxPrice || 10000,
+      minDiscount: urlParams.disccount || 0,
+      sort: urlParams.sortValue || "price_low",
+      pageNumber: urlParams.pageNumber,
+      pageSize: 10,
+      stock: urlParams.stock,
+    };
+  }, [param.lavelThree, urlParams]);
+
+  useEffect(() => {
+    dispatch(findProducts(apiData));
+  }, [dispatch, apiData]);
 
   const handleSortChange = (value) => {
     const searchParams = new URLSearchParams(location.search);
@@ -72,33 +97,6 @@ export default function Product() {
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
-
-  useEffect(() => {
-    const [minPrice, maxPrice] =
-      price === null ? [0, 0] : price.split("-").map(Number);
-    const data = {
-      category: param.lavelThree,
-      colors: colorValue || [],
-      sizes: sizeValue || [],
-      minPrice: minPrice || 0,
-      maxPrice: maxPrice || 10000,
-      minDiscount: disccount || 0,
-      sort: sortValue || "price_low",
-      pageNumber: pageNumber ,
-      pageSize: 10,
-      stock: stock,
-    };
-    dispatch(findProducts(data));
-  }, [
-    param.lavelThree,
-    colorValue,
-    sizeValue,
-    price,
-    disccount,
-    sortValue,
-    pageNumber,
-    stock,
-  ]);
 
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);

@@ -88,11 +88,6 @@ const ProductsTable = () => {
     dispatch(deleteProduct(productId))
   }
 
-  const getStockStatus = (quantity) => {
-    if (quantity > 0) return "in_stock";
-    return "out_of_stock";
-  };
-
   return (
     <Box width={"100%"}>
       <Card className="p-3">
@@ -222,7 +217,6 @@ const ProductsTable = () => {
                 <TableCell sx={{ textAlign: "center" }}>Category</TableCell>
                 <TableCell sx={{ textAlign: "center" }}>Price</TableCell>
                 <TableCell sx={{ textAlign: "center" }}>Quantity</TableCell>
-                <TableCell sx={{ textAlign: "center" }}>Status</TableCell>
                 <TableCell sx={{ textAlign: "center" }}>Delete</TableCell>
                 <TableCell sx={{ textAlign: "center" }}>Edit</TableCell>
               </TableRow>
@@ -257,26 +251,8 @@ const ProductsTable = () => {
                   <TableCell sx={{ textAlign: "center" }}>
                     {item.thirdLevelCategory}
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    <Box sx={{ display: "flex", flexDirection: "column" }}>
-                      <Typography variant="body2" sx={{ textDecoration: "line-through", color: "text.secondary" }}>
-                        ₹{item.price}
-                      </Typography>
-                      <Typography variant="body1">₹{item.discountedPrice}</Typography>
-                    </Box>
-                  </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>{item.discountedPrice}</TableCell>
                   <TableCell sx={{ textAlign: "center" }}>{item.quantity}</TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: item.quantity > 0 ? "success.main" : "error.main",
-                        fontWeight: "medium"
-                      }}
-                    >
-                      {item.quantity > 0 ? "In Stock" : "Out of Stock"}
-                    </Typography>
-                  </TableCell>
                   <TableCell sx={{ textAlign: "center" }} className="text-white">
                     <Button onClick={() => handleDeleteProduct(item._id)} variant="text" color="error">
                       Delete

@@ -65,7 +65,7 @@ const RecentOrders = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {orders.map((order) => (
+            {Array.isArray(orders) && orders.map((order) => (
               <TableRow hover key={order._id} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}>
                 <TableCell>
                   <Avatar alt={order.items[0]?.product?.title} src={order.items[0]?.product?.imageUrl} />

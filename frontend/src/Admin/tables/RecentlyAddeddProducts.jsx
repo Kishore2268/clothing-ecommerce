@@ -50,7 +50,7 @@ const RecentlyAddeddProducts = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products.map(product => (
+            {Array.isArray(products) && products.map(product => (
               <TableRow hover key={product._id} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}>
                 <TableCell>
                   <Avatar alt={product.title} src={product.imageUrl} />
@@ -69,6 +69,15 @@ const RecentlyAddeddProducts = () => {
                 <TableCell>{new Date(product.createdAt).toLocaleDateString()}</TableCell>
               </TableRow>
             ))}
+            {(!Array.isArray(products) || products.length === 0) && (
+              <TableRow>
+                <TableCell colSpan={6} align="center">
+                  <Typography variant="body1" sx={{ py: 2 }}>
+                    No products found
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

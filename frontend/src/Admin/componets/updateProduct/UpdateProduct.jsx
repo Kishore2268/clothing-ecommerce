@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Typography } from "@mui/material";
+import { Typography, Alert } from "@mui/material";
 import {
   Grid,
   TextField,
@@ -9,6 +9,7 @@ import {
   Select,
   MenuItem,
   Box,
+  CircularProgress,
 } from "@mui/material";
 
 import { Fragment } from "react";
@@ -19,7 +20,8 @@ import {
   updateProduct,
 } from "../../../Redux/Customers/Product/Action";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import api from "../../../config/api";
 
 const initialSizes = [
   { name: "S", quantity: 0 },
@@ -43,9 +45,11 @@ const UpdateProductForm = () => {
     thirdLevelCategory: "",
     description: "",
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
-  const jwt = localStorage.getItem("jwt");
+  const navigate = useNavigate();
   const { productId } = useParams();
   const { customersProduct } = useSelector((store) => store);
 
@@ -70,43 +74,53 @@ const UpdateProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5454/api/admin/products/${productId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${jwt}`
-        },
-        body: JSON.stringify(productData)
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Product updated successfully:", data);
-      } else {
-        console.error("Failed to update product");
-      }
+      await dispatch(updateProduct({ ...productData, productId }));
+      navigate("/admin/products"); // Navigate back to products list after successful update
     } catch (error) {
-      console.error("Error updating product:", error);
+      setError("Failed to update product. Please try again.");
     }
   };
 
   useEffect(() => {
     const fetchProduct = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const response = await fetch(`http://localhost:5454/api/products/${productId}`, {
-          headers: {
-            'Authorization': `Bearer ${jwt}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        const data = await response.json();
+        const { data } = await api.get(`/api/products/id/${productId}`);
         setProductData(data);
       } catch (error) {
-        console.error("Error fetching product:", error);
+        if (error.response?.status === 404) {
+          setError("Product not found. It may have been deleted or the ID is incorrect.");
+        } else {
+          setError("Failed to fetch product. Please try again.");
+        }
+      } finally {
+        setLoading(false);
       }
     };
     fetchProduct();
   }, [productId]);
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box p={3}>
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+        <Button variant="contained" onClick={() => navigate("/admin/products")}>
+          Back to Products
+        </Button>
+      </Box>
+    );
+  }
 
   return (
     <Box className="p-8">
@@ -188,14 +202,40 @@ const UpdateProductForm = () => {
           <Grid item xs={12} sm={4}>
             <TextField
               fullWidth
-              label="Discount Percentage"
+              label="Discount Percent"
               name="discountPercent"
               value={productData.discountPercent}
               onChange={handleChange}
               type="number"
             />
           </Grid>
-          <Grid item xs={6} sm={4}>
+
+          {/* Size Section */}
+          {productData.sizes.map((size, index) => (
+            <Fragment key={index}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Size"
+                  name="name"
+                  value={size.name}
+                  onChange={(e) => handleSizeChange(e, index)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Quantity"
+                  name="size_quantity"
+                  value={size.quantity}
+                  onChange={(e) => handleSizeChange(e, index)}
+                  type="number"
+                />
+              </Grid>
+            </Fragment>
+          ))}
+
+          <Grid item xs={12} sm={4}>
             <FormControl fullWidth>
               <InputLabel>Top Level Category</InputLabel>
               <Select
@@ -210,7 +250,7 @@ const UpdateProductForm = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={6} sm={4}>
+          <Grid item xs={12} sm={4}>
             <FormControl fullWidth>
               <InputLabel>Second Level Category</InputLabel>
               <Select
@@ -225,7 +265,7 @@ const UpdateProductForm = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={6} sm={4}>
+          <Grid item xs={12} sm={4}>
             <FormControl fullWidth>
               <InputLabel>Third Level Category</InputLabel>
               <Select
@@ -245,42 +285,19 @@ const UpdateProductForm = () => {
               </Select>
             </FormControl>
           </Grid>
+
           <Grid item xs={12}>
             <TextField
               fullWidth
-              multiline
-              rows={3}
               label="Description"
               name="description"
               value={productData.description}
               onChange={handleChange}
+              multiline
+              rows={4}
             />
           </Grid>
-          {productData.sizes.map((size, index) => (
-            <Grid container item spacing={3} key={index}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Size Name"
-                  name="name"
-                  value={size.name}
-                  onChange={(e) => handleSizeChange(e, index)}
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Quantity"
-                  name="size_quantity"
-                  type="number"
-                  value={size.quantity}
-                  onChange={(e) => handleSizeChange(e, index)}
-                  required
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-          ))}
+
           <Grid item xs={12}>
             <Button
               variant="contained"

@@ -18,11 +18,17 @@ const HomeProductCard = ({ product }) => {
         />
       </div>
 
-      <div className="p-4 ">
-        <h3 className="text-lg font-medium text-gray-900">
+      <div className="p-4 w-full">
+        <h3 className="text-lg font-medium text-gray-900 truncate">
           {product?.brand || product?.title}
         </h3>
-        <p className="mt-2 text-sm text-gray-500">{product?.title}</p>
+        <p className="mt-1 text-sm text-gray-500 truncate">{product?.title}</p>
+        
+        <div className="mt-3 flex items-center space-x-2">
+          <span className="text-lg font-semibold text-gray-900">₹{product?.discountedPrice}</span>
+          <span className="text-sm text-gray-500 line-through">₹{product?.price}</span>
+          <span className="text-sm font-semibold text-green-600">{product?.discountPercent}% off</span>
+        </div>
       </div>
     </div>
   );
