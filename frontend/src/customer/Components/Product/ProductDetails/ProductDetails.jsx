@@ -2,7 +2,7 @@ import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductReviewCard from "./ProductReviewCard";
-import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
+import { Box, Button, Grid, LinearProgress, Rating, Dialog, DialogTitle, DialogContent, DialogActions, IconButton } from "@mui/material";
 import HomeProductCard from "../../Home/HomeProductCard";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import { addItemToCart } from "../../../../Redux/Customers/Cart/Action";
 import { getAllReviews } from "../../../../Redux/Customers/Review/Action";
 import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
 import { gounsPage1 } from "../../../../Data/Gowns/gowns";
+import CloseIcon from '@mui/icons-material/Close';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -19,6 +20,7 @@ function classNames(...classes) {
 export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState();
   const [activeImage, setActiveImage] = useState(null);
+  const [openLoginDialog, setOpenLoginDialog] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { customersProduct, review } = useSelector((store) => store);
@@ -32,13 +34,18 @@ export default function ProductDetails() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!jwt) {
-      navigate("/login");
+      setOpenLoginDialog(true);
       return;
     }
     const data = { productId, size: selectedSize.name };
     dispatch(addItemToCart({ data, jwt }));
     navigate("/cart");
   };
+
+  const handleCloseDialog = () => {
+    setOpenLoginDialog(false);
+  };
+
 
   useEffect(() => {
     const data = { productId: productId, jwt };
@@ -320,17 +327,37 @@ export default function ProductDetails() {
             </Grid>
           </div>
         </section>
-
-        {/* similer product */}
-        <section className=" pt-10">
-          <h1 className="py-5 text-xl font-bold">Similer Products</h1>
-          <div className="flex flex-wrap space-y-5">
-            {gounsPage1.map((item) => (
-              <HomeProductCard product={item} />
-            ))}
-          </div>
-        </section>
       </div>
+
+      <Dialog
+        open={openLoginDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="login-dialog-title"
+        aria-describedby="login-dialog-description"
+      >
+        <div className="relative">
+          <DialogTitle id="login-dialog-title" className="pr-12">
+            Login Required
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleCloseDialog}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </div>
+        <DialogContent>
+          <p id="login-dialog-description" className="py-4">
+            You need to login to add products to cart.
+          </p>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
