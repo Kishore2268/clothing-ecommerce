@@ -6,7 +6,7 @@
         "color": "white",
         "discountedPrice": 299,
         "price": 1299,
-        "discountPersent": 76,
+        "discountPercent": 76,
         "size": [
             {
               "name": "S",

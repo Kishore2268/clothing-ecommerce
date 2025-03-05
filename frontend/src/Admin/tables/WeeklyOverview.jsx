@@ -7,6 +7,7 @@ import CardHeader from '@mui/material/CardHeader'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
+import { useEffect, useState } from 'react'
 
 // ** Icons Imports
 import DotsVertical from 'mdi-material-ui/DotsVertical'
@@ -19,6 +20,33 @@ import ReactApexCharts from 'react-apexcharts';
 const WeeklyOverview = () => {
   // ** Hook
   const theme = useTheme()
+  const [weeklyData, setWeeklyData] = useState({
+    sales: [],
+    performance: 0
+  });
+  const jwt = localStorage.getItem("jwt");
+
+  useEffect(() => {
+    const fetchWeeklyData = async () => {
+      try {
+        const response = await fetch('http://localhost:5454/api/admin/stats/weekly', {
+          headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        setWeeklyData({
+          sales: data.weeklySales || [],
+          performance: data.weeklyPerformance || 0
+        });
+      } catch (error) {
+        console.error("Error fetching weekly stats:", error);
+      }
+    };
+
+    fetchWeeklyData();
+  }, [jwt]);
 
   const options = {
     chart: {
@@ -96,12 +124,12 @@ const WeeklyOverview = () => {
         }
       />
       <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
-        <ReactApexCharts  type='bar' height={201} options={options} series={[{ data: [37, 57, 45, 75, 57, 40, 65] }]} />
+        <ReactApexCharts type='bar' height={201} options={options} series={[{ data: weeklyData.sales }]} />
         <Box sx={{ mb: 5, display: 'flex', alignItems: 'center' }}>
           <Typography variant='h5' sx={{ mr: 4 }}>
-            45%
+            {weeklyData.performance}%
           </Typography>
-          <Typography variant='body2'>Your sales performance is 45% 😎 better compared to last month</Typography>
+          <Typography variant='body2'>Your sales performance is {weeklyData.performance}% 😎 better compared to last week</Typography>
         </Box>
         <Button fullWidth variant='contained'>
           Details

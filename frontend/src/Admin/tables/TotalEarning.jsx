@@ -6,43 +6,43 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
-import LinearProgress from '@mui/material/LinearProgress'
+import { useEffect, useState } from 'react'
 
 // ** Icons Imports
 import MenuUp from 'mdi-material-ui/MenuUp'
 import DotsVertical from 'mdi-material-ui/DotsVertical'
 
-const data = [
-  {
-    progress: 75,
-    imgHeight: 20,
-    title: 'Men',
-    color: 'primary',
-    amount: '$24,895.65',
-    subtitle: 'Clothing, Footware',
-    imgSrc: 'https://rukminim1.flixcart.com/image/612/612/xif0q/shirt/z/3/7/xl-r-dark-grey-stoneberg-original-imaghghn2vcf5euv.jpeg?q=70'
-  },
-  {
-    progress: 50,
-    color: 'info',
-    imgHeight: 27,
-    title: 'Women',
-    amount: '$8,650.20',
-    subtitle: 'Clothing, Handbags, jewellery',
-    imgSrc: 'https://rukminim1.flixcart.com/image/612/612/xif0q/lehenga-choli/y/p/c/free-half-sleeve-jk-6-kedar-fab-original-imaghh4unhxgyveg.jpeg?q=70'
-  },
-  {
-    progress: 20,
-    imgHeight: 20,
-    title: 'Kids',
-    color: 'secondary',
-    amount: '$1,245.80',
-    subtitle: 'Clothing',
-    imgSrc: 'https://rukminim1.flixcart.com/image/612/612/xif0q/kids-t-shirt/i/7/e/10-11-years-bwtrnfulboy-bz55-blive-original-imagmuafh2ennezv.jpeg?q=70'
-  }
-]
-
 const TotalEarning = () => {
+  const [earningData, setEarningData] = useState({
+    totalEarning: 0,
+    yearlyComparison: 0,
+    categoryData: []
+  });
+  const jwt = localStorage.getItem("jwt");
+
+  useEffect(() => {
+    const fetchEarningData = async () => {
+      try {
+        const response = await fetch('http://localhost:5454/api/admin/stats/earnings', {
+          headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        setEarningData({
+          totalEarning: data.totalEarning || 0,
+          yearlyComparison: data.yearlyComparison || 0,
+          categoryData: data.categoryEarnings || []
+        });
+      } catch (error) {
+        console.error("Error fetching earning stats:", error);
+      }
+    };
+
+    fetchEarningData();
+  }, [jwt]);
+
   return (
     <Card>
       <CardHeader
@@ -57,28 +57,28 @@ const TotalEarning = () => {
       <CardContent sx={{ pt: theme => `${theme.spacing(1.5)} !important` }}>
         <Box sx={{ mb: 1.5, display: 'flex', alignItems: 'center' }}>
           <Typography variant='h4' sx={{ fontWeight: 600, fontSize: '2.125rem !important' }}>
-            $24,895
+            ${earningData.totalEarning.toLocaleString()}
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', color: 'success.main' }}>
             <MenuUp sx={{ fontSize: '1.875rem', verticalAlign: 'middle' }} />
             <Typography variant='body2' sx={{ fontWeight: 600, color: 'success.main' }}>
-              10%
+              {earningData.yearlyComparison}%
             </Typography>
           </Box>
         </Box>
 
         <Typography component='p' variant='caption' sx={{ mb: 5 }}>
-          Compared to $84,325 last year
+          Compared to ${(earningData.totalEarning * (1 - earningData.yearlyComparison/100)).toLocaleString()} last year
         </Typography>
 
-        {data.map((item, index) => {
+        {earningData.categoryData.map((item, index) => {
           return (
             <Box
-              key={item.title}
+              key={item.category}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                ...(index !== data.length - 1 ? { mb: 4 } : {})
+                ...(index !== earningData.categoryData.length - 1 ? { mb: 4 } : {})
               }}
             >
               <Avatar
@@ -86,11 +86,10 @@ const TotalEarning = () => {
                 sx={{
                   mr: 3,
                   width: 40,
-                  height: 40,
-                  
+                  height: 40
                 }}
               >
-                <img src={item.imgSrc} alt={item.title} height={item.imgHeight} />
+                <img src={item.imageUrl} alt={item.category} height={item.imageHeight || 20} />
               </Avatar>
               <Box
                 sx={{
@@ -103,16 +102,15 @@ const TotalEarning = () => {
               >
                 <Box sx={{ marginRight: 2, display: 'flex', flexDirection: 'column' }}>
                   <Typography variant='body2' sx={{ mb: 0.5, fontWeight: 600, color: 'text.primary' }}>
-                    {item.title}
+                    {item.category}
                   </Typography>
-                  <Typography variant='caption'>{item.subtitle}</Typography>
+                  <Typography variant='caption'>{item.description}</Typography>
                 </Box>
 
                 <Box sx={{ minWidth: 85, display: 'flex', flexDirection: 'column' }}>
                   <Typography variant='body2' sx={{ mb: 2, fontWeight: 600, color: 'text.primary' }}>
-                    {item.amount}
+                    ${item.earnings.toLocaleString()}
                   </Typography>
-                  
                 </Box>
               </Box>
             </Box>

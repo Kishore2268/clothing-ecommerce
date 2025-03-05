@@ -182,7 +182,7 @@ export default function AdminNavbar({handleSideBarViewInMobile}) {
           >
             <MenuIcon />
           </IconButton>}
-          <Avatar alt="Zosh" src="https://res.cloudinary.com/ddkso1wxi/image/upload/v1675919455/Logo/Copy_of_Zosh_Academy_nblljp.png" />
+          <Avatar alt="Ecommerce-clothing" src="https://icon2.cleanpng.com/20180723/kzi/kisspng-t-shirt-logo-uniform-sleeve-outerwear-acne-clothing-logo-5b55960f4c1545.4011841315323356313116.jpg" />
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -194,20 +194,6 @@ export default function AdminNavbar({handleSideBarViewInMobile}) {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
             <IconButton
               size="large"
               edge="end"

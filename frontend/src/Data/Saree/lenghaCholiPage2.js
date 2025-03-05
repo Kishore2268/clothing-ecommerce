@@ -7,7 +7,7 @@ export const lehngacholiPage2=[
     color: "Grey",
     selling_price: "₹2,069",
     price: "₹4,599",
-    disscount: "55% off",
+    discount: "55% off",
     size: "",
   },
   {
@@ -18,7 +18,7 @@ export const lehngacholiPage2=[
     color: "Yellow",
     selling_price: "₹4,016",
     price: "₹8,995",
-    disscount: "55% off",
+    discount: "55% off",
     size: "",
   },
   {
@@ -29,7 +29,7 @@ export const lehngacholiPage2=[
     color: "Green",
     selling_price: "₹386",
     price: "₹1,799",
-    disscount: "78% off",
+    discount: "78% off",
     size: "",
   },
   {
@@ -40,7 +40,7 @@ export const lehngacholiPage2=[
     color: "Purple",
     selling_price: "₹615",
     price: "₹3,499",
-    disscount: "82% off",
+    discount: "82% off",
     size: "",
   },
   {
@@ -51,7 +51,7 @@ export const lehngacholiPage2=[
     color: "Pink",
     selling_price: "₹439",
     price: "₹1,999",
-    disscount: "78% off",
+    discount: "78% off",
     size: "",
   },
   {
@@ -62,7 +62,7 @@ export const lehngacholiPage2=[
     color: "Blue",
     selling_price: "₹499",
     price: "₹3,099",
-    disscount: "83% off",
+    discount: "83% off",
     size: "",
   },
   {
@@ -73,7 +73,7 @@ export const lehngacholiPage2=[
     color: "Red",
     selling_price: "₹484",
     price: "₹2,499",
-    disscount: "80% off",
+    discount: "80% off",
     size: "",
   },
   {
@@ -84,7 +84,7 @@ export const lehngacholiPage2=[
     color: "Pink, Green",
     selling_price: "₹854",
     price: "₹2,099",
-    disscount: "59% off",
+    discount: "59% off",
     size: "",
   },
   {
@@ -95,7 +95,7 @@ export const lehngacholiPage2=[
     color: "Blue",
     selling_price: "₹479",
     price: "₹1,499",
-    disscount: "68% off",
+    discount: "68% off",
     size: "",
   },
   {
@@ -106,7 +106,7 @@ export const lehngacholiPage2=[
     color: "Red",
     selling_price: "₹424",
     price: "₹1,999",
-    disscount: "78% off",
+    discount: "78% off",
     size: "",
   },
   {
@@ -117,7 +117,7 @@ export const lehngacholiPage2=[
     color: "White",
     selling_price: "₹2,249",
     price: "₹4,999",
-    disscount: "55% off",
+    discount: "55% off",
     size: "",
   },
   {
@@ -128,7 +128,7 @@ export const lehngacholiPage2=[
     color: "Purple",
     selling_price: "₹1,934",
     price: "₹4,299",
-    disscount: "55% off",
+    discount: "55% off",
     size: "",
   },
   {
@@ -139,7 +139,7 @@ export const lehngacholiPage2=[
     color: "Dark Blue",
     selling_price: "₹784",
     price: "₹1,999",
-    disscount: "60% off",
+    discount: "60% off",
     size: "",
   },
   {
@@ -150,7 +150,7 @@ export const lehngacholiPage2=[
     color: "Red",
     selling_price: "₹599",
     price: "₹3,999",
-    disscount: "85% off",
+    discount: "85% off",
     size: "",
   },
   {

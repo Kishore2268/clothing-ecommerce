@@ -9,141 +9,86 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import { Avatar, CardHeader, Pagination } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-
-const rows = [
-  {
-    age: 27,
-    status: 'current',
-    date: '09/27/2018',
-    name: 'Sally Quinn',
-    salary: '$19586.23',
-    email: 'eebsworth2m@sbwire.com',
-    designation: 'Human Resources Assistant',
-    image:"https://rukminim1.flixcart.com/image/832/832/xif0q/lehenga-choli/c/v/q/free-half-sleeve-sadhna-kedar-fab-original-imagpawdqwjqz6vt.jpeg?q=70"
-  },
-  {
-    age: 61,
-    date: '09/23/2016',
-    salary: '$23896.35',
-    status: 'professional',
-    name: 'Margaret Bowers',
-    email: 'kocrevy0@thetimes.co.uk',
-    designation: 'Nuclear Power Engineer',
-    image:"https://rukminim1.flixcart.com/image/832/832/xif0q/lehenga-choli/c/v/q/free-half-sleeve-sadhna-kedar-fab-original-imagpawdqwjqz6vt.jpeg?q=70"
-  },
-  {
-    age: 59,
-    date: '10/15/2017',
-    name: 'Minnie Roy',
-    status: 'rejected',
-    salary: '$18991.67',
-    email: 'ediehn6@163.com',
-    designation: 'Environmental Specialist',
-    image:"https://rukminim1.flixcart.com/image/832/832/xif0q/lehenga-choli/c/v/q/free-half-sleeve-sadhna-kedar-fab-original-imagpawdqwjqz6vt.jpeg?q=70"
-  },
-  {
-    age: 30,
-    date: '06/12/2018',
-    status: 'resigned',
-    salary: '$19252.12',
-    name: 'Ralph Leonard',
-    email: 'dfalloona@ifeng.com',
-    designation: 'Sales Representative',
-    image:"https://rukminim1.flixcart.com/image/832/832/xif0q/lehenga-choli/c/v/q/free-half-sleeve-sadhna-kedar-fab-original-imagpawdqwjqz6vt.jpeg?q=70"
-  },
-  {
-    age: 66,
-    status: 'applied',
-    date: '03/24/2018',
-    salary: '$13076.28',
-    name: 'Annie Martin',
-    designation: 'Operator',
-    email: 'sganderton2@tuttocitta.it',
-    image:"https://rukminim1.flixcart.com/image/832/832/xif0q/lehenga-choli/c/v/q/free-half-sleeve-sadhna-kedar-fab-original-imagpawdqwjqz6vt.jpeg?q=70"
-  },
-  {
-    age: 33,
-    date: '08/25/2017',
-    salary: '$10909.52',
-    name: 'Adeline Day',
-    status: 'professional',
-    email: 'hnisius4@gnu.org',
-    designation: 'Senior Cost Accountant'
-  },
-  {
-    age: 61,
-    status: 'current',
-    date: '06/01/2017',
-    salary: '$17803.80',
-    name: 'Lora Jackson',
-    designation: 'Geologist',
-    email: 'ghoneywood5@narod.ru'
-  },
-  {
-    age: 22,
-    date: '12/03/2017',
-    salary: '$12336.17',
-    name: 'Rodney Sharp',
-    status: 'professional',
-    designation: 'Cost Accountant',
-    email: 'dcrossman3@google.co.jp'
-  }
-]
-
-
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Customers = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
+  const [users, setUsers] = useState([]);
+  const jwt = localStorage.getItem("jwt");
+
+  useEffect(() => {
+    fetchUsers();
+  }, [page]);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch('http://localhost:5454/api/users', {
+        headers: {
+          'Authorization': `Bearer ${jwt}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
   function handlePaginationChange(event, value) {
-    console.log("Current page:", value);
+    setPage(value);
   }
+
   return (
     <Box>
-         <Card>
-      <CardHeader
+      <Card>
+        <CardHeader
           title='All Customers'
           sx={{ pt: 2, alignItems: 'center', '& .MuiCardHeader-action': { mt: 0.6 } }}
-          
         />
-      <TableContainer>
-        <Table sx={{ minWidth: 390 }} aria-label='table in dashboard'>
-          <TableHead>
-            <TableRow>
-            <TableCell>User Id</TableCell>
-            <TableCell>Image</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.slice(0,10).map((item,index) => (
-              <TableRow hover key={item.name} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}>
-                <TableCell>{index+1}</TableCell>
-                <TableCell> <Avatar alt={item.name} src={item.image} /> </TableCell>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.email}</TableCell>
-                
-                
-               
-               
+        <TableContainer>
+          <Table sx={{ minWidth: 390 }} aria-label='table in dashboard'>
+            <TableHead>
+              <TableRow>
+                <TableCell>User Id</TableCell>
+                <TableCell>Image</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Role</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Card>
-    <Card className="mt-2 felx justify-center items-center">
+            </TableHead>
+            <TableBody>
+              {users.map((user, index) => (
+                <TableRow hover key={user._id} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>
+                    <Avatar alt={user.firstName} src={user.profilePicture || ''}>
+                      {user.firstName[0]}
+                    </Avatar>
+                  </TableCell>
+                  <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.role}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Card>
+      <Card className="mt-2 flex justify-center items-center">
         <Pagination
           className="py-5 w-auto"
           size="large"
-          count={10}
+          count={Math.ceil(users.length / 10)}
           color="primary"
           onChange={handlePaginationChange}
+          page={page}
         />
       </Card>
     </Box>
-   
   )
 }
 

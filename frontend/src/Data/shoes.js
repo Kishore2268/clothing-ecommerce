@@ -6,7 +6,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,455",
         "price": "₹1,599",
-        "disscount": "9% off",
+        "discount": "9% off",
         "size": ""
     },
     {
@@ -16,7 +16,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,117",
         "price": "₹1,999",
-        "disscount": "44% off",
+        "discount": "44% off",
         "size": ""
     },
     {
@@ -26,7 +26,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹499",
         "price": "₹998",
-        "disscount": "50% off",
+        "discount": "50% off",
         "size": ""
     },
     {
@@ -36,7 +36,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹299",
         "price": "₹1,299",
-        "disscount": "76% off",
+        "discount": "76% off",
         "size": ""
     },
     {
@@ -46,7 +46,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹249",
         "price": "₹1,299",
-        "disscount": "80% off",
+        "discount": "80% off",
         "size": ""
     },
     {
@@ -56,7 +56,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹199",
         "price": "₹999",
-        "disscount": "80% off",
+        "discount": "80% off",
         "size": ""
     },
     {
@@ -66,7 +66,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹499",
         "price": "₹1,498",
-        "disscount": "66% off",
+        "discount": "66% off",
         "size": ""
     },
     {
@@ -76,7 +76,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹249",
         "price": "₹1,299",
-        "disscount": "80% off",
+        "discount": "80% off",
         "size": ""
     },
     {
@@ -86,7 +86,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹949",
         "price": "₹1,699",
-        "disscount": "44% off",
+        "discount": "44% off",
         "size": ""
     },
     {
@@ -96,7 +96,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹249",
         "price": "₹998",
-        "disscount": "75% off",
+        "discount": "75% off",
         "size": ""
     },
     {
@@ -106,7 +106,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹811",
         "price": "₹1,249",
-        "disscount": "35% off",
+        "discount": "35% off",
         "size": ""
     },
     {
@@ -116,7 +116,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,047",
         "price": "₹1,999",
-        "disscount": "47% off",
+        "discount": "47% off",
         "size": ""
     },
     {
@@ -126,7 +126,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹249",
         "price": "₹1,299",
-        "disscount": "80% off",
+        "discount": "80% off",
         "size": ""
     },
     {
@@ -136,7 +136,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹299",
         "price": "₹999",
-        "disscount": "70% off",
+        "discount": "70% off",
         "size": ""
     },
     {
@@ -146,7 +146,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹514",
         "price": "₹999",
-        "disscount": "48% off",
+        "discount": "48% off",
         "size": ""
     },
     {
@@ -156,7 +156,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,329",
         "price": "₹1,799",
-        "disscount": "26% off",
+        "discount": "26% off",
         "size": ""
     },
     {
@@ -166,7 +166,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹896",
         "price": "₹1,120",
-        "disscount": "20% off",
+        "discount": "20% off",
         "size": ""
     },
     {
@@ -176,7 +176,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹499",
         "price": "₹2,499",
-        "disscount": "80% off",
+        "discount": "80% off",
         "size": ""
     },
     {
@@ -186,7 +186,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,054",
         "price": "₹1,299",
-        "disscount": "18% off",
+        "discount": "18% off",
         "size": ""
     },
     {
@@ -196,7 +196,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹299",
         "price": "₹1,299",
-        "disscount": "76% off",
+        "discount": "76% off",
         "size": ""
     },
     {
@@ -206,7 +206,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹489",
         "price": "₹1,699",
-        "disscount": "71% off",
+        "discount": "71% off",
         "size": ""
     },
     {
@@ -216,7 +216,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,099",
         "price": "₹1,999",
-        "disscount": "45% off",
+        "discount": "45% off",
         "size": ""
     },
     {
@@ -226,7 +226,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹399",
         "price": "₹999",
-        "disscount": "60% off",
+        "discount": "60% off",
         "size": ""
     },
     {
@@ -236,7 +236,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹649",
         "price": "₹3,842",
-        "disscount": "83% off",
+        "discount": "83% off",
         "size": ""
     },
     {
@@ -246,7 +246,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹939",
         "price": "₹2,250",
-        "disscount": "58% off",
+        "discount": "58% off",
         "size": ""
     },
     {
@@ -256,7 +256,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹494",
         "price": "₹1,499",
-        "disscount": "67% off",
+        "discount": "67% off",
         "size": ""
     },
     {
@@ -266,7 +266,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,299",
         "price": "₹2,299",
-        "disscount": "43% off",
+        "discount": "43% off",
         "size": ""
     },
     {
@@ -276,7 +276,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,199",
         "price": "₹2,399",
-        "disscount": "50% off",
+        "discount": "50% off",
         "size": ""
     },
     {
@@ -286,7 +286,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹349",
         "price": "₹1,299",
-        "disscount": "73% off",
+        "discount": "73% off",
         "size": ""
     },
     {
@@ -296,7 +296,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹976",
         "price": "₹2,499",
-        "disscount": "60% off",
+        "discount": "60% off",
         "size": ""
     },
     {
@@ -306,7 +306,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,299",
         "price": "₹1,699",
-        "disscount": "23% off",
+        "discount": "23% off",
         "size": ""
     },
     {
@@ -316,7 +316,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹715",
         "price": "₹1,999",
-        "disscount": "64% off",
+        "discount": "64% off",
         "size": ""
     },
     {
@@ -326,7 +326,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,199",
         "price": "₹2,799",
-        "disscount": "57% off",
+        "discount": "57% off",
         "size": ""
     },
     {
@@ -336,7 +336,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹2,657",
         "price": "₹5,299",
-        "disscount": "49% off",
+        "discount": "49% off",
         "size": ""
     },
     {
@@ -346,7 +346,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹299",
         "price": "₹1,299",
-        "disscount": "76% off",
+        "discount": "76% off",
         "size": ""
     },
     {
@@ -356,7 +356,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹942",
         "price": "₹1,699",
-        "disscount": "44% off",
+        "discount": "44% off",
         "size": ""
     },
     {
@@ -366,7 +366,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,693",
         "price": "₹3,999",
-        "disscount": "57% off",
+        "discount": "57% off",
         "size": ""
     },
     {
@@ -376,7 +376,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹399",
         "price": "₹998",
-        "disscount": "60% off",
+        "discount": "60% off",
         "size": ""
     },
     {
@@ -386,7 +386,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹759",
         "price": "₹1,299",
-        "disscount": "41% off",
+        "discount": "41% off",
         "size": ""
     },
     {
@@ -396,7 +396,7 @@ export const mensShoesPage1=[
         "color": "",
         "selling_price": "₹1,259",
         "price": "₹2,299",
-        "disscount": "45% off",
+        "discount": "45% off",
         "size": ""
     }
 ]

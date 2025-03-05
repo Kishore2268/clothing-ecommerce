@@ -44,4 +44,8 @@ app.use("/api/ratings",ratingRouter);
 const adminOrderRoutes=require("./routes/adminOrder.routes.js");
 app.use("/api/admin/orders",adminOrderRoutes);
 
+// admin statistics routes
+const adminStatsRouter = require("./routes/adminStats.routes.js");
+app.use("/api/admin/stats", adminStatsRouter);
+
 module.exports={app};

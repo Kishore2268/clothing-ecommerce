@@ -8,6 +8,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Box,
 } from "@mui/material";
 
 import { Fragment } from "react";
@@ -34,14 +35,15 @@ const UpdateProductForm = () => {
     color: "",
     discountedPrice: "",
     price: "",
-    discountPersent: "",
-    size: initialSizes,
+    discountPercent: "",
+    sizes: initialSizes,
     quantity: "",
-    topLavelCategory: "",
-    secondLavelCategory: "",
-    thirdLavelCategory: "",
+    topLevelCategory: "",
+    secondLevelCategory: "",
+    thirdLevelCategory: "",
     description: "",
   });
+
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
   const { productId } = useParams();
@@ -56,50 +58,66 @@ const UpdateProductForm = () => {
   };
 
   const handleSizeChange = (e, index) => {
-    let { name, value } = e.target;
-    name === "size_quantity" ? (name = "quantity") : (name = e.target.name);
-
-    const sizes = [...productData.size];
-    sizes[index][name] = value;
+    const { name, value } = e.target;
+    const sizes = [...productData.sizes];
+    sizes[index][name === "size_quantity" ? "quantity" : name] = value;
     setProductData((prevState) => ({
       ...prevState,
-      size: sizes,
+      sizes,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(updateProduct());
-    console.log(productData);
+    try {
+      const response = await fetch(`http://localhost:5454/api/admin/products/${productId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwt}`
+        },
+        body: JSON.stringify(productData)
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Product updated successfully:", data);
+      } else {
+        console.error("Failed to update product");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
   };
 
   useEffect(() => {
-    dispatch(findProductById({productId}));
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://localhost:5454/api/products/${productId}`, {
+          headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        setProductData(data);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      }
+    };
+    fetchProduct();
   }, [productId]);
 
-  useEffect(()=>{
-    if(customersProduct.product){
-        for(let key in productData){
-    setProductData((prev)=>({...prev,[key]:customersProduct.product[key]}))
-    console.log(customersProduct.product[key],"--------",key)
-}
-    }
-
-  },[customersProduct.product])
-
   return (
-    <Fragment className="createProductContainer ">
+    <Box className="p-8">
       <Typography
         variant="h3"
         sx={{ textAlign: "center" }}
-        className="py-10 text-center "
+        className="py-10 text-center"
       >
-        Add New Product
+        Update Product
       </Typography>
-      <form
-        onSubmit={handleSubmit}
-        className="createProductContainer min-h-screen"
-      >
+      <form onSubmit={handleSubmit} className="createProductContainer">
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -119,7 +137,6 @@ const UpdateProductForm = () => {
               onChange={handleChange}
             />
           </Grid>
-
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -168,13 +185,12 @@ const UpdateProductForm = () => {
               type="number"
             />
           </Grid>
-
           <Grid item xs={12} sm={4}>
             <TextField
               fullWidth
               label="Discount Percentage"
-              name="discountPersent"
-              value={productData.discountPersent}
+              name="discountPercent"
+              value={productData.discountPercent}
               onChange={handleChange}
               type="number"
             />
@@ -183,14 +199,14 @@ const UpdateProductForm = () => {
             <FormControl fullWidth>
               <InputLabel>Top Level Category</InputLabel>
               <Select
-                name="topLavelCategory"
-                value={productData.topLavelCategory}
+                name="topLevelCategory"
+                value={productData.topLevelCategory}
                 onChange={handleChange}
                 label="Top Level Category"
               >
-                <MenuItem value="Men">Men</MenuItem>
-                <MenuItem value="Women">Women</MenuItem>
-                <MenuItem value="Kids">Kids</MenuItem>
+                <MenuItem value="men">Men</MenuItem>
+                <MenuItem value="women">Women</MenuItem>
+                <MenuItem value="kids">Kids</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -198,14 +214,14 @@ const UpdateProductForm = () => {
             <FormControl fullWidth>
               <InputLabel>Second Level Category</InputLabel>
               <Select
-                name="secondLavelCategory"
-                value={productData.secondLavelCategory}
+                name="secondLevelCategory"
+                value={productData.secondLevelCategory}
                 onChange={handleChange}
                 label="Second Level Category"
               >
-                <MenuItem value="Clothing">Clothing</MenuItem>
-                <MenuItem value="Accessories">Accessories</MenuItem>
-                <MenuItem value="Brands">Brands</MenuItem>
+                <MenuItem value="clothing">Clothing</MenuItem>
+                <MenuItem value="accessories">Accessories</MenuItem>
+                <MenuItem value="brands">Brands</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -213,40 +229,41 @@ const UpdateProductForm = () => {
             <FormControl fullWidth>
               <InputLabel>Third Level Category</InputLabel>
               <Select
-                name="thirdLavelCategory"
-                value={productData.thirdLavelCategory}
+                name="thirdLevelCategory"
+                value={productData.thirdLevelCategory}
                 onChange={handleChange}
                 label="Third Level Category"
               >
-                <MenuItem value="Tops">Tops</MenuItem>
-                <MenuItem value="Dresses">Dresses</MenuItem>
-                <MenuItem value="T-Shirts">T-Shirts</MenuItem>
-                <MenuItem value="Saree">Saree</MenuItem>
-                <MenuItem value="Saree">Saree</MenuItem>
-                <MenuItem value="Lengha Choli">Lengha Choli</MenuItem>
+                <MenuItem value="tops">Tops</MenuItem>
+                <MenuItem value="dresses">Dresses</MenuItem>
+                <MenuItem value="t-shirts">T-Shirts</MenuItem>
+                <MenuItem value="saree">Saree</MenuItem>
+                <MenuItem value="lengha_choli">Lengha Choli</MenuItem>
+                <MenuItem value="jeans">Jeans</MenuItem>
+                <MenuItem value="trousers">Trousers</MenuItem>
+                <MenuItem value="shoes">Shoes</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              id="outlined-multiline-static"
-              label="Description"
               multiline
-              name="description"
               rows={3}
-              onChange={handleChange}
+              label="Description"
+              name="description"
               value={productData.description}
+              onChange={handleChange}
             />
           </Grid>
-          {/* {productData.size.map((size, index) => (
-            <Grid container item spacing={3}>
+          {productData.sizes.map((size, index) => (
+            <Grid container item spacing={3} key={index}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   label="Size Name"
                   name="name"
                   value={size.name}
-                  onChange={(event) => handleSizeChange(event, index)}
+                  onChange={(e) => handleSizeChange(e, index)}
                   required
                   fullWidth
                 />
@@ -256,13 +273,14 @@ const UpdateProductForm = () => {
                   label="Quantity"
                   name="size_quantity"
                   type="number"
-                  onChange={(event) => handleSizeChange(event, index)}
+                  value={size.quantity}
+                  onChange={(e) => handleSizeChange(e, index)}
                   required
                   fullWidth
                 />
-              </Grid>{" "}
+              </Grid>
             </Grid>
-          ))} */}
+          ))}
           <Grid item xs={12}>
             <Button
               variant="contained"
@@ -273,19 +291,10 @@ const UpdateProductForm = () => {
             >
               Update Product
             </Button>
-            {/* <Button
-              variant="contained"
-              sx={{ p: 1.8 }}
-              className="py-20 ml-10"
-              size="large"
-              onClick={()=>handleAddProducts(dressPage1)}
-            >
-              Add Products By Loop
-            </Button> */}
           </Grid>
         </Grid>
       </form>
-    </Fragment>
+    </Box>
   );
 };
 

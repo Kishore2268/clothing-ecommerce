@@ -25,7 +25,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 63
+,        "discount": 63
         
     },
     {
@@ -54,7 +54,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount":49
+,        "discount":49
    },
     {
         "imageUrl": "https://rukminim1.flixcart.com/image/612/612/xif0q/jean/1/4/v/-original-imaggjcyhzz4myqh.jpeg?q=70",
@@ -82,7 +82,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 70
+,        "discount": 70
         
     },
     {
@@ -111,7 +111,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 64
+,        "discount": 64
         
     },
     {
@@ -140,7 +140,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 55
+,        "discount": 55
         
     },
     {
@@ -169,7 +169,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 70
+,        "discount": 70
         
     },
     {
@@ -198,7 +198,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 60
+,        "discount": 60
         
     },
     {
@@ -227,7 +227,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 67
+,        "discount": 67
         
     },
     {
@@ -256,7 +256,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 67
+,        "discount": 67
         
     },
     {
@@ -285,7 +285,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 60
+,        "discount": 60
         
     },
     {
@@ -314,7 +314,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 62
+,        "discount": 62
         
     },
     {
@@ -343,7 +343,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 10
+,        "discount": 10
         
     },
     {
@@ -372,7 +372,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 60
+,        "discount": 60
         
     },
     {
@@ -401,7 +401,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 65
+,        "discount": 65
         
     },
     {
@@ -430,7 +430,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 60
+,        "discount": 60
         
     },
     {
@@ -459,7 +459,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 70
+,        "discount": 70
         
     },
     {
@@ -488,7 +488,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 57
+,        "discount": 57
         
     },
     {
@@ -517,7 +517,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 8
+,        "discount": 8
        
     },
     {
@@ -546,7 +546,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 83
+,        "discount": 83
         
     },
     {
@@ -575,7 +575,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 65
+,        "discount": 65
         
     },
     {
@@ -604,7 +604,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 5
+,        "discount": 5
        
     },
     {
@@ -633,7 +633,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 61
+,        "discount": 61
         
     },
     {
@@ -662,7 +662,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 55
+,        "discount": 55
         
     },
     {
@@ -691,7 +691,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 63
+,        "discount": 63
         
     },
     {
@@ -720,7 +720,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 60
+,        "discount": 60
         
     },
     {
@@ -749,7 +749,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 70
+,        "discount": 70
         
     },
     {
@@ -778,7 +778,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 65
+,        "discount": 65
         
     },
     {
@@ -807,7 +807,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 81
+,        "discount": 81
         
     },
     {
@@ -836,7 +836,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 55
+,        "discount": 55
         
     },
     {
@@ -865,7 +865,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 70
+,        "discount": 70
         
     },
     {
@@ -894,7 +894,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 57
+,        "discount": 57
         
     },
     {
@@ -923,7 +923,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 81
+,        "discount": 81
         
     },
     {
@@ -952,7 +952,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 65
+,        "discount": 65
         
     },
     {
@@ -981,7 +981,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 70
+,        "discount": 70
         
     },
     {
@@ -1010,7 +1010,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 55
+,        "discount": 55
         
     },
     {
@@ -1039,7 +1039,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 70
+,        "discount": 70
         
     },
     {
@@ -1068,7 +1068,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 50
+,        "discount": 50
         
     },
     {
@@ -1097,7 +1097,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 52
+,        "discount": 52
         
     },
     {
@@ -1126,7 +1126,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 67
+,        "discount": 67
         
     },
     {
@@ -1155,7 +1155,7 @@ export const mensPantsPage1=[
           "secondLavelCategory": "Clothing",
           "thirdLavelCategory": "Pant",
           "description":"Discover stylish men's pants that exude both comfort and fashion-forward design. These meticulously crafted pants are perfect for any occasion, providing a perfect blend of style and versatility."
-,        "disscount": 67
+,        "discount": 67
         
         
     }

@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Avatar, Button, Menu, MenuItem } from "@mui/material";
+import { Avatar, Button, Menu, MenuItem, TextField, InputAdornment } from "@mui/material";
 import { navigation } from "../../../config/navigationMenu";
 import AuthModal from "../Auth/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,14 +22,16 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { auth,cart } = useSelector((store) => store);
+  const { auth, cart } = useSelector((store) => store);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openUserMenu = Boolean(anchorEl);
   const jwt = localStorage.getItem("jwt");
-  const location=useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     if (jwt) {
@@ -76,6 +78,35 @@ export default function Navigation() {
     navigate("/account/order")
   }
 
+  const handleSearch = async (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query.trim()) {
+      try {
+        const response = await fetch(`http://localhost:5454/api/products/search?q=${query}`, {
+          headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        setSearchResults(data);
+      } catch (error) {
+        console.error("Error searching products:", error);
+      }
+    } else {
+      setSearchResults([]);
+    }
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${searchQuery}`);
+    }
+  };
+
   return (
     <div className="bg-white pb-10">
       {/* Mobile menu */}
@@ -103,7 +134,7 @@ export default function Navigation() {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <Dialog.Panel className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
+              <Dialog.Panel className="relative flex w-full max-w-md flex-col overflow-y-auto bg-white pb-12 shadow-xl">
                 <div className="flex px-4 pb-2 pt-5">
                   <button
                     type="button"
@@ -142,76 +173,77 @@ export default function Navigation() {
                         key={category.name}
                         className="space-y-10 px-4 pb-8 pt-10"
                       >
-                        <div className="grid grid-cols-2 gap-x-4">
-                          {category.featured.map((item) => (
-                            <div
-                              key={item.name}
-                              className="group relative text-sm"
-                            >
-                              <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                <img
-                                  src={item.imageSrc}
-                                  alt={item.imageAlt}
-                                  className="object-cover object-center"
-                                />
-                              </div>
-                              <a
-                                href={item.href}
-                                className="mt-6 block font-medium text-gray-900"
-                              >
-                                <span
-                                  className="absolute inset-0 z-10"
-                                  aria-hidden="true"
-                                />
-                                {item.name}
-                              </a>
-                              <p aria-hidden="true" className="mt-1">
-                                Shop now
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                        {category.sections.map((section) => (
-                          <div key={section.name}>
-                            <p
-                              id={`${category.id}-${section.id}-heading-mobile`}
-                              className="font-medium text-gray-900"
-                            >
-                              {section.name}
-                            </p>
-                            {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
-                            <ul
-                              role="list"
-                              aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
-                              className="mt-6 flex flex-col space-y-6"
-                            >
-                              {section.items.map((item) => (
-                                <li key={item.name} className="flow-root">
-                                  <p className="-m-2 block p-2 text-gray-500">
-                                    {"item.name"}
+                        {({ close }) => (
+                          <>
+                            <div className="grid grid-cols-2 gap-x-4">
+                              {category.featured.map((item) => (
+                                <div
+                                  key={item.name}
+                                  className="group relative text-sm"
+                                >
+                                  <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
+                                    <img
+                                      src={item.imageSrc}
+                                      alt={item.imageAlt}
+                                      className="h-64 w-full object-cover object-center"
+                                    />
+                                  </div>
+                                  <a
+                                    href={item.href}
+                                    className="mt-6 block font-medium text-gray-900"
+                                  >
+                                    <span
+                                      className="absolute inset-0 z-10"
+                                      aria-hidden="true"
+                                    />
+                                    {item.name}
+                                  </a>
+                                  <p aria-hidden="true" className="mt-1">
+                                    Shop now
                                   </p>
-                                </li>
+                                </div>
                               ))}
-                            </ul>
-                          </div>
-                        ))}
+                            </div>
+                            {category.sections.map((section) => (
+                              <div key={section.name}>
+                                <p
+                                  id={`${category.id}-${section.id}-heading-mobile`}
+                                  className="font-medium text-gray-900"
+                                >
+                                  {section.name}
+                                </p>
+                                {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
+                                <ul
+                                  role="list"
+                                  aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
+                                  className="mt-6 flex flex-col space-y-6"
+                                >
+                                  {section.items.map((item) => (
+                                    <li key={item.name} className="flow-root">
+                                      <p 
+                                        onClick={() =>
+                                          handleCategoryClick(
+                                            category,
+                                            section,
+                                            item,
+                                            close
+                                          )
+                                        }
+                                        className="-m-2 block p-2 text-gray-500 cursor-pointer hover:text-gray-800"
+                                      >
+                                        {item.name}
+                                      </p>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </>
+                        )}
                       </Tab.Panel>
                     ))}
                   </Tab.Panels>
                 </Tab.Group>
-
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  {navigation.pages.map((page) => (
-                    <div key={page.name} className="flow-root">
-                      <a
-                        href={page.href}
-                        className="-m-2 block p-2 font-medium text-gray-900"
-                      >
-                        {page.name}
-                      </a>
-                    </div>
-                  ))}
-                </div>
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
@@ -321,7 +353,7 @@ export default function Navigation() {
                                             <img
                                               src={item.imageSrc}
                                               alt={item.imageAlt}
-                                              className="object-cover object-center"
+                                              className="h-64 w-full object-cover object-center"
                                             />
                                           </div>
                                           <a
@@ -391,18 +423,29 @@ export default function Navigation() {
                       )}
                     </Popover>
                   ))}
-
-                  {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      {page.name}
-                    </a>
-                  ))}
                 </div>
               </Popover.Group>
+
+              {/* Search Bar */}
+              <div className="flex-1 flex justify-center px-4">
+                <form onSubmit={handleSearchSubmit} className="w-full max-w-lg">
+                  <TextField
+                    fullWidth
+                    value={searchQuery}
+                    onChange={handleSearch}
+                    placeholder="Search for products..."
+                    variant="outlined"
+                    size="small"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </form>
+              </div>
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
@@ -414,7 +457,6 @@ export default function Navigation() {
                         aria-controls={open ? "basic-menu" : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? "true" : undefined}
-                        // onClick={handleUserClick}
                         sx={{
                           bgcolor: deepPurple[500],
                           color: "white",
@@ -423,15 +465,6 @@ export default function Navigation() {
                       >
                         {auth.user?.firstName[0].toUpperCase()}
                       </Avatar>
-                      {/* <Button
-                        id="basic-button"
-                        aria-controls={open ? "basic-menu" : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
-                        onClick={handleUserClick}
-                      >
-                        Dashboard
-                      </Button> */}
                       <Menu
                         id="basic-menu"
                         anchorEl={anchorEl}
@@ -459,17 +492,6 @@ export default function Navigation() {
                       Signin
                     </Button>
                   )}
-                </div>
-
-                {/* Search */}
-                <div className="flex lg:ml-6">
-                  <p className="p-2 text-gray-400 hover:text-gray-500">
-                    <span className="sr-only">Search</span>
-                    <MagnifyingGlassIcon
-                      className="h-6 w-6"
-                      aria-hidden="true"
-                    />
-                  </p>
                 </div>
 
                 {/* Cart */}

@@ -1,24 +1,50 @@
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import Button from '@mui/material/Button'
 import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
+import { useEffect, useState } from 'react'
 
 // ** Icons Imports
 import DotsVertical from 'mdi-material-ui/DotsVertical'
 
 // ** Custom Components Imports
-import ReactApexCharts from 'react-apexcharts';
-
-// import ReactApexcharts from 'src/@core/components/react-apexcharts'
+import ReactApexCharts from 'react-apexcharts'
 
 const SalesOverTime = () => {
-  // ** Hook
   const theme = useTheme()
+  const [salesData, setSalesData] = useState({
+    monthlySales: [],
+    totalSales: 0,
+    growthRate: 0
+  });
+  const jwt = localStorage.getItem("jwt");
+
+  useEffect(() => {
+    const fetchSalesData = async () => {
+      try {
+        const response = await fetch('http://localhost:5454/api/admin/stats/sales-trend', {
+          headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        setSalesData({
+          monthlySales: data.monthlySales || [],
+          totalSales: data.totalSales || 0,
+          growthRate: data.growthRate || 0
+        });
+      } catch (error) {
+        console.error("Error fetching sales trend:", error);
+      }
+    };
+
+    fetchSalesData();
+  }, [jwt]);
 
   const options = {
     chart: {
@@ -26,17 +52,13 @@ const SalesOverTime = () => {
       toolbar: { show: false }
     },
     plotOptions: {
-      bar: {
-        borderRadius: 9,
-        distributed: true,
-        columnWidth: '40%',
-        endingShape: 'rounded',
-        startingShape: 'rounded'
+      area: {
+        fillTo: 'end'
       }
     },
     stroke: {
-      width: 2,
-      colors: [theme.palette.background.paper]
+      width: 4,
+      curve: 'smooth'
     },
     legend: { show: false },
     grid: {
@@ -49,14 +71,7 @@ const SalesOverTime = () => {
       }
     },
     dataLabels: { enabled: false },
-    colors: [
-      theme.palette.background.default,
-      theme.palette.background.default,
-      theme.palette.background.default,
-      theme.palette.primary.main,
-      theme.palette.background.default,
-      theme.palette.background.default
-    ],
+    colors: [theme.palette.primary.main],
     states: {
       hover: {
         filter: { type: 'none' }
@@ -66,10 +81,10 @@ const SalesOverTime = () => {
       }
     },
     xaxis: {
-      categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       tickPlacement: 'on',
-      labels: { show: false },
-      axisTicks: { show: false },
+      labels: { show: true },
+      axisTicks: { show: true },
       axisBorder: { show: false }
     },
     yaxis: {
@@ -77,17 +92,24 @@ const SalesOverTime = () => {
       tickAmount: 4,
       labels: {
         offsetX: -17,
-        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}` : value}k`
+        formatter: value => `$${value}k`
       }
     }
   }
+
+  const series = [
+    {
+      name: 'Sales',
+      data: salesData.monthlySales
+    }
+  ]
 
   return (
     <Card>
       <CardHeader
         title='Sales Over Time'
         titleTypographyProps={{
-          sx: { lineHeight: '0.5rem !important', letterSpacing: '0.15px !important' }
+          sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' }
         }}
         action={
           <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
@@ -96,19 +118,25 @@ const SalesOverTime = () => {
         }
       />
       <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
-        <ReactApexCharts  type='bar' height={274} options={options} series={[{ data: [37, 57, 45, 75, 57, 40, 65] }]} />
-        <Box sx={{ mb: 5, display: 'flex', alignItems: 'center' }}>
-          <Typography variant='h5' sx={{ mr: 4 }}>
-            45%
-          </Typography>
-          <Typography variant='body2'>Your sales performance is 45% 😎 better compared to last month</Typography>
+        <Box sx={{ mb: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Box>
+            <Typography variant='h5' sx={{ fontWeight: 600 }}>
+              ${salesData.totalSales.toLocaleString()}
+            </Typography>
+            <Typography variant='body2'>Total Sales</Typography>
+          </Box>
+          <Box>
+            <Typography variant='h5' sx={{ fontWeight: 600, color: salesData.growthRate >= 0 ? 'success.main' : 'error.main' }}>
+              {salesData.growthRate >= 0 ? '+' : ''}{salesData.growthRate}%
+            </Typography>
+            <Typography variant='body2'>Growth Rate</Typography>
+          </Box>
         </Box>
-        <Button fullWidth variant='contained'>
-          Details
-        </Button>
+        <ReactApexCharts type='area' height={400} options={options} series={series} />
       </CardContent>
     </Card>
   )
 }
 
 export default SalesOverTime
+

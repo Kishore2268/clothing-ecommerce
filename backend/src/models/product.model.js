@@ -4,25 +4,25 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
   title: {
     type: String,
-    // required: true,
+    required: true,
   },
   description: {
     type: String,
-    // required: true,
+    required: true,
   },
   price: {
     type: Number,
-    // required: true,
+    required: true,
   },
   discountedPrice: {
     type: Number,
   },
-  discountPersent: {
+  discountPercent: {
     type: Number,
   },
   quantity: {
     type: Number,
-    // required: true,
+    required: true,
   },
   brand: {
     type: String,
@@ -31,8 +31,8 @@ const productSchema = new mongoose.Schema({
     type: String,
   },
   sizes: [{
-    name:{type:String},
-    quantity:{type:Number}
+    name: {type: String},
+    quantity: {type: Number}
   }], 
   imageUrl: {
     type: String,
@@ -53,10 +53,18 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'categories',
-  }, 
+  topLevelCategory: {
+    type: String,
+    required: true,
+  },
+  secondLevelCategory: {
+    type: String,
+    required: true,
+  },
+  thirdLevelCategory: {
+    type: String,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

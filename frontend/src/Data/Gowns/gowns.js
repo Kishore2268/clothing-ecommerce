@@ -6,7 +6,7 @@ export const gounsPage1=[
         "color": "Blue",
         "selling_price": "₹466",
         "price": "₹999",
-        "disscount": "53% off",
+        "discount": "53% off",
         "size": ""
     },
     {
@@ -16,7 +16,7 @@ export const gounsPage1=[
         "color": "Red",
         "selling_price": "₹449",
         "price": "₹1,099",
-        "disscount": "59% off",
+        "discount": "59% off",
         "size": ""
     },
     {
@@ -26,7 +26,7 @@ export const gounsPage1=[
         "color": "Beige",
         "selling_price": "₹298",
         "price": "₹1,599",
-        "disscount": "81% off",
+        "discount": "81% off",
         "size": ""
     },
     {
@@ -36,7 +36,7 @@ export const gounsPage1=[
         "color": "Beige",
         "selling_price": "₹298",
         "price": "₹1,599",
-        "disscount": "81% off",
+        "discount": "81% off",
         "size": ""
     },
     {
@@ -46,7 +46,7 @@ export const gounsPage1=[
         "color": "Light Green",
         "selling_price": "₹284",
         "price": "₹1,599",
-        "disscount": "82% off",
+        "discount": "82% off",
         "size": ""
     },
     {
@@ -56,7 +56,7 @@ export const gounsPage1=[
         "color": "Dark Blue",
         "selling_price": "₹298",
         "price": "₹1,599",
-        "disscount": "81% off",
+        "discount": "81% off",
         "size": ""
     },
     {
@@ -66,7 +66,7 @@ export const gounsPage1=[
         "color": "Pink",
         "selling_price": "₹499",
         "price": "₹2,099",
-        "disscount": "76% off",
+        "discount": "76% off",
         "size": ""
     },
     {
@@ -76,7 +76,7 @@ export const gounsPage1=[
         "color": "Grey",
         "selling_price": "₹689",
         "price": "₹1,199",
-        "disscount": "42% off",
+        "discount": "42% off",
         "size": ""
     },
     {
@@ -86,7 +86,7 @@ export const gounsPage1=[
         "color": "Pink",
         "selling_price": "₹499",
         "price": "₹3,099",
-        "disscount": "83% off",
+        "discount": "83% off",
         "size": ""
     },
     {
@@ -96,7 +96,7 @@ export const gounsPage1=[
         "color": "Pink",
         "selling_price": "₹499",
         "price": "₹2,099",
-        "disscount": "76% off",
+        "discount": "76% off",
         "size": ""
     },
     {
@@ -106,7 +106,7 @@ export const gounsPage1=[
         "color": "Light Blue",
         "selling_price": "₹555",
         "price": "₹999",
-        "disscount": "44% off",
+        "discount": "44% off",
         "size": ""
     },
     {
@@ -116,7 +116,7 @@ export const gounsPage1=[
         "color": "Maroon",
         "selling_price": "₹769",
         "price": "₹1,199",
-        "disscount": "35% off",
+        "discount": "35% off",
         "size": ""
     },
     {
@@ -126,7 +126,7 @@ export const gounsPage1=[
         "color": "Yellow",
         "selling_price": "₹444",
         "price": "₹2,599",
-        "disscount": "82% off",
+        "discount": "82% off",
         "size": ""
     },
     {
@@ -136,7 +136,7 @@ export const gounsPage1=[
         "color": "Beige",
         "selling_price": "₹298",
         "price": "₹1,599",
-        "disscount": "81% off",
+        "discount": "81% off",
         "size": ""
     },
     {
@@ -146,7 +146,7 @@ export const gounsPage1=[
         "color": "Grey",
         "selling_price": "₹499",
         "price": "₹3,099",
-        "disscount": "83% off",
+        "discount": "83% off",
         "size": ""
     },
     {
@@ -156,7 +156,7 @@ export const gounsPage1=[
         "color": "Beige",
         "selling_price": "₹298",
         "price": "₹1,599",
-        "disscount": "81% off",
+        "discount": "81% off",
         "size": ""
     },
     {
@@ -166,7 +166,7 @@ export const gounsPage1=[
         "color": "Multicolor",
         "selling_price": "₹779",
         "price": "₹1,199",
-        "disscount": "35% off",
+        "discount": "35% off",
         "size": ""
     },
     {
@@ -176,7 +176,7 @@ export const gounsPage1=[
         "color": "Grey",
         "selling_price": "₹679",
         "price": "₹1,199",
-        "disscount": "43% off",
+        "discount": "43% off",
         "size": ""
     },
     {
@@ -186,7 +186,7 @@ export const gounsPage1=[
         "color": "Black",
         "selling_price": "₹499",
         "price": "₹1,599",
-        "disscount": "68% off",
+        "discount": "68% off",
         "size": ""
     },
     {
@@ -196,7 +196,7 @@ export const gounsPage1=[
         "color": "Maroon",
         "selling_price": "₹499",
         "price": "₹3,099",
-        "disscount": "83% off",
+        "discount": "83% off",
         "size": ""
     },
     {
@@ -206,7 +206,7 @@ export const gounsPage1=[
         "color": "Multicolor",
         "selling_price": "₹636",
         "price": "₹1,999",
-        "disscount": "68% off",
+        "discount": "68% off",
         "size": ""
     },
     {
@@ -216,7 +216,7 @@ export const gounsPage1=[
         "color": "Yellow",
         "selling_price": "₹749",
         "price": "₹2,499",
-        "disscount": "70% off",
+        "discount": "70% off",
         "size": ""
     },
     {
@@ -226,7 +226,7 @@ export const gounsPage1=[
         "color": "Purple",
         "selling_price": "₹674",
         "price": "₹3,099",
-        "disscount": "78% off",
+        "discount": "78% off",
         "size": ""
     },
     {
@@ -236,7 +236,7 @@ export const gounsPage1=[
         "color": "Green",
         "selling_price": "₹674",
         "price": "₹3,099",
-        "disscount": "78% off",
+        "discount": "78% off",
         "size": ""
     },
     {
@@ -246,7 +246,7 @@ export const gounsPage1=[
         "color": "Light Green",
         "selling_price": "₹297",
         "price": "₹1,599",
-        "disscount": "81% off",
+        "discount": "81% off",
         "size": ""
     },
     {
@@ -256,7 +256,7 @@ export const gounsPage1=[
         "color": "Light Green",
         "selling_price": "₹300",
         "price": "₹1,599",
-        "disscount": "81% off",
+        "discount": "81% off",
         "size": ""
     },
     {
@@ -266,7 +266,7 @@ export const gounsPage1=[
         "color": "Yellow",
         "selling_price": "₹499",
         "price": "₹3,099",
-        "disscount": "83% off",
+        "discount": "83% off",
         "size": ""
     },
     {
@@ -276,7 +276,7 @@ export const gounsPage1=[
         "color": "Blue",
         "selling_price": "₹499",
         "price": "₹1,999",
-        "disscount": "75% off",
+        "discount": "75% off",
         "size": ""
     },
     {
@@ -286,7 +286,7 @@ export const gounsPage1=[
         "color": "Black",
         "selling_price": "₹499",
         "price": "₹1,999",
-        "disscount": "75% off",
+        "discount": "75% off",
         "size": ""
     },
     {
@@ -296,7 +296,7 @@ export const gounsPage1=[
         "color": "Pink",
         "selling_price": "₹649",
         "price": "₹2,999",
-        "disscount": "78% off",
+        "discount": "78% off",
         "size": ""
     },
     {
@@ -306,7 +306,7 @@ export const gounsPage1=[
         "color": "Grey",
         "selling_price": "₹680",
         "price": "₹2,999",
-        "disscount": "77% off",
+        "discount": "77% off",
         "size": ""
     },
     {
@@ -316,7 +316,7 @@ export const gounsPage1=[
         "color": "Blue",
         "selling_price": "₹499",
         "price": "₹1,999",
-        "disscount": "75% off",
+        "discount": "75% off",
         "size": ""
     },
     {
@@ -326,7 +326,7 @@ export const gounsPage1=[
         "color": "Green",
         "selling_price": "₹499",
         "price": "₹3,099",
-        "disscount": "83% off",
+        "discount": "83% off",
         "size": ""
     },
     {
@@ -336,7 +336,7 @@ export const gounsPage1=[
         "color": "Red",
         "selling_price": "₹499",
         "price": "₹1,599",
-        "disscount": "68% off",
+        "discount": "68% off",
         "size": ""
     },
     {
@@ -346,7 +346,7 @@ export const gounsPage1=[
         "color": "White",
         "selling_price": "₹499",
         "price": "₹1,999",
-        "disscount": "75% off",
+        "discount": "75% off",
         "size": ""
     },
     {
@@ -356,7 +356,7 @@ export const gounsPage1=[
         "color": "Pink",
         "selling_price": "₹749",
         "price": "₹2,999",
-        "disscount": "75% off",
+        "discount": "75% off",
         "size": ""
     },
     {
@@ -366,7 +366,7 @@ export const gounsPage1=[
         "color": "Blue",
         "selling_price": "₹729",
         "price": "₹2,999",
-        "disscount": "75% off",
+        "discount": "75% off",
         "size": ""
     },
     {
@@ -376,7 +376,7 @@ export const gounsPage1=[
         "color": "Purple",
         "selling_price": "₹499",
         "price": "₹2,099",
-        "disscount": "76% off",
+        "discount": "76% off",
         "size": ""
     },
     {
@@ -386,7 +386,7 @@ export const gounsPage1=[
         "color": "Green",
         "selling_price": "₹499",
         "price": "₹3,099",
-        "disscount": "83% off",
+        "discount": "83% off",
         "size": ""
     },
     {
@@ -396,7 +396,7 @@ export const gounsPage1=[
         "color": "Red",
         "selling_price": "₹499",
         "price": "₹3,099",
-        "disscount": "83% off",
+        "discount": "83% off",
         "size": ""
     }
 ]

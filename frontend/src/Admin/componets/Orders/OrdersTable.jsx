@@ -39,10 +39,15 @@ const OrdersTable = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ status: "", sort: "" });
   const [orderStatus, setOrderStatus] = useState("");
+  const [page, setPage] = useState(1);
+  const ordersPerPage = 10; // Number of orders per page
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
   const { adminsOrder } = useSelector((store) => store);
   const [anchorElArray, setAnchorElArray] = useState([]);
+
+  // Calculate total pages
+  const totalPages = Math.ceil((adminsOrder?.orders?.length || 0) / ordersPerPage);
 
   useEffect(() => {
     dispatch(getOrders({ jwt }));
@@ -71,7 +76,7 @@ const OrdersTable = () => {
     setFormData({ ...formData, [name]: value });
   };
   function handlePaginationChange(event, value) {
-    console.log("Current page:", value);
+    setPage(value);
   }
 
   const handleConfirmedOrder = (orderId, index) => {
@@ -290,14 +295,17 @@ const OrdersTable = () => {
           </Table>
         </TableContainer>
       </Card>
-      <Card className="mt-2 felx justify-center items-center">
-        <Pagination
-          className="py-5 w-auto"
-          size="large"
-          count={10}
-          color="primary"
-          onChange={handlePaginationChange}
-        />
+      <Card className="mt-2">
+        <Box sx={{ display: 'flex', justifyContent: 'center', padding: '1rem' }}>
+          <Pagination
+            count={totalPages}
+            page={page}
+            color="primary"
+            size="large"
+            onChange={handlePaginationChange}
+            sx={{ display: 'flex', justifyContent: 'center' }}
+          />
+        </Box>
       </Card>
     </Box>
   );
