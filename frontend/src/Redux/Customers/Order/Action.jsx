@@ -56,8 +56,13 @@ export const getOrderById = (orderId) => async (dispatch) => {
 
     const { data } = await api.get(
       `/api/orders/${orderId}`,
-      
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      }
     );
+
     console.log("order by id ", data);
     dispatch({
       type: GET_ORDER_BY_ID_SUCCESS,

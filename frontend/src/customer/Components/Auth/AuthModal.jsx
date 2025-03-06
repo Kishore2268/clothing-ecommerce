@@ -27,7 +27,7 @@ export default function AuthModal({ handleClose, open }) {
     if (auth.user){
        handleClose();
        if(auth.user?.role==="ADMIN"){
-        navigate('/admin')
+        navigate('/')
        }
       }
   }, [auth.user]);

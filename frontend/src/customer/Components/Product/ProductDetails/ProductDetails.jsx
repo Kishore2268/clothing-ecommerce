@@ -8,9 +8,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findProductById } from "../../../../Redux/Customers/Product/Action";
 import { addItemToCart } from "../../../../Redux/Customers/Cart/Action";
-import { getAllReviews } from "../../../../Redux/Customers/Review/Action";
-import { lengha_page1 } from "../../../../Data/Women/LenghaCholi";
-import { gounsPage1 } from "../../../../Data/Gowns/gowns";
+import { getAllReviews,createReview,createRating } from "../../../../Redux/Customers/Review/Action";
 import CloseIcon from '@mui/icons-material/Close';
 
 function classNames(...classes) {
@@ -21,6 +19,22 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState();
   const [activeImage, setActiveImage] = useState(null);
   const [openLoginDialog, setOpenLoginDialog] = useState(false);
+  const [reviewText, setReviewText] = useState(""); // State for review text
+  const [selectedRating, setSelectedRating] = useState(0); // State for selected rating
+
+  const handleReviewSubmit = (e) => {
+    e.preventDefault();
+    if (!jwt) {
+      setOpenLoginDialog(true);
+      return;
+    }
+    const reviewData = { productId, review: reviewText, rating: selectedRating }; // Prepare review data with rating
+    dispatch(createReview(reviewData)); // Dispatch createReview action
+    setReviewText(""); // Clear the review input
+    setSelectedRating(0); // Reset the selected rating
+  };
+
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { customersProduct, review } = useSelector((store) => store);
@@ -216,7 +230,49 @@ export default function ProductDetails() {
                   </RadioGroup>
                 </div>
 
+                <form onSubmit={handleReviewSubmit} className="mt-10">
+                  <Rating
+                    name="simple-controlled"
+                    value={selectedRating}
+                    onChange={(event, newValue) => {
+                      setSelectedRating(newValue);
+                    }}
+                  />
+
+                  <Rating
+                    name="simple-controlled"
+                    value={selectedRating}
+                    onChange={(event, newValue) => {
+                      setSelectedRating(newValue);
+                    }}
+                  />
+
+                  <Rating
+                    name="simple-controlled"
+                    value={selectedRating}
+                    onChange={(event, newValue) => {
+                      setSelectedRating(newValue);
+                    }}
+                  />
+
+                  <textarea
+                    value={reviewText}
+                    onChange={(e) => setReviewText(e.target.value)}
+                    placeholder="Write your review here..."
+                    className="border rounded p-2 w-full"
+                    rows="4"
+                    required
+                  />
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    sx={{ padding: ".8rem 2rem", marginTop: "1rem" }}
+                  >
+                    Submit Review
+                  </Button>
+                </form>
                 <Button
+
                   variant="contained"
                   type="submit"
                   sx={{ padding: ".8rem 2rem", marginTop: "2rem" }}
@@ -270,7 +326,8 @@ export default function ProductDetails() {
             <Grid container spacing={7}>
               <Grid item xs={7}>
                 <div className="space-y-5">
-                  {review.reviews?.map((item) => (
+                  {(Array.isArray(review.reviews) ? review.reviews : []).map((item) => (
+
                     <ProductReviewCard key={item._id} item={item} />
                   ))}
                   {(!review.reviews || review.reviews.length === 0) && (

@@ -17,8 +17,16 @@ const OrderDetails = () => {
   console.log("order", order.order);
 
   useEffect(() => {
-    dispatch(getOrderById(orderId));
-  }, [dispatch, orderId]); // ✅ Fixed missing dependency
+    if (orderId) {
+      dispatch(getOrderById(orderId));
+    } else {
+      console.error("Invalid order ID");
+      // Optionally redirect or show a message
+
+
+    }
+  }, [dispatch, orderId]);
+
 
   const navigate = useNavigate();
   return (

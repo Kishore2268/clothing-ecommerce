@@ -63,8 +63,8 @@ async function findProductById(id) {
   }
 }
 
-// Get all products with filtering and pagination
 async function getAllProducts(reqQuery = {}) {
+  // Get all products with filtering and pagination
   let {
     category,
     color,
@@ -156,6 +156,19 @@ async function getAllProducts(reqQuery = {}) {
   };
 }
 
+// Search products by query
+async function searchProduct(query) {
+  const regex = new RegExp(query, 'i'); // Case-insensitive search
+  const products = await Product.find({
+    $or: [
+      { title: { $regex: regex } },
+      { description: { $regex: regex } },
+      { brand: { $regex: regex } }
+    ]
+  });
+  return products;
+}
+
 async function createMultipleProduct(products) {
   for (let product of products) {
     await createProduct(product);
@@ -168,5 +181,6 @@ module.exports = {
   updateProduct,
   getAllProducts,
   findProductById,
+  searchProduct,
   createMultipleProduct,
 };

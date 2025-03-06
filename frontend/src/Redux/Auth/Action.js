@@ -18,10 +18,12 @@ const registerRequest = () => ({ type: REGISTER_REQUEST });
 const registerSuccess = (user) => ({ type: REGISTER_SUCCESS, payload: user });
 const registerFailure = error => ({ type: REGISTER_FAILURE, payload: error });
 
-export const register = userData => async dispatch => {
+export const register = ({ userName, ...userData }) => async dispatch => {
+
   dispatch(registerRequest());
   try {
-    const response = await axios.post(`${API_BASE_URL}/auth/signup`, userData);
+    const response = await axios.post(`${API_BASE_URL}/auth/signup`, { userName, ...userData });
+
     const user = response.data;
     if (user.jwt) {
       localStorage.setItem("jwt", user.jwt);
