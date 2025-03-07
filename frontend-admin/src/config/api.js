@@ -1,9 +1,8 @@
 
 import axios from 'axios';
-const DEPLOYED='https://pear-poised-hen.cyclic.app/'
-const LOCALHOST='http://localhost:5454'
+const DEPLOYED='https://clothing-ecommerce-service.onrender.com'
 
-export const API_BASE_URL = LOCALHOST;
+export const API_BASE_URL = DEPLOYED;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
