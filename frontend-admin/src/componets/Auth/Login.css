@@ -1,0 +1,11 @@
+.login-page{
+    margin: 0;
+    padding: 0;
+    background-image: url(https://imgs.search.brave.com/prKBEPL49pM6Lpusj1KmvMVi5FSS7cFvvO1xqFtsEe4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9h/cnJhbmdlbWVudC1i/bGFjay1mcmlkYXkt/c2hvcHBpbmctY2Fy/dHMtd2l0aC1jb3B5/LXNwYWNlXzIzLTIx/NDg2NjcwNDcuanBn/P3NlbXQ9YWlzX2h5/YnJpZA);
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}

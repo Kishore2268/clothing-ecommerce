@@ -4,6 +4,7 @@ import { Badge, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import "./Cart.css"
 import { getCart } from "../../../Redux/Customers/Cart/Action";
 
 const Cart = () => {
@@ -20,9 +21,9 @@ const Cart = () => {
   if (cart.cartItems.length === 0) {
     return (
       <div className="empty-cart">
-        <img src="path/to/animated-face-emoji.png" alt="Empty Cart" />
-        <h2>Your cart is empty</h2>
-        <Button onClick={() => navigate('/')}>Go to Main Page</Button>
+        <img className="h-48 w-48 object-cover" src="https://imgs.search.brave.com/sNUiiIvHNPUINkt7Gf9x12JaJ8vUN6jgMNqrmEFpptM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTM3/MDM3MzI3Ni92ZWN0/b3Ivc2FkLWZhY2Ut/ZW1vamkuanBnP3M9/NjEyeDYxMiZ3PTAm/az0yMCZjPVlYUzds/amNISE9PeFVsOVF3/cGNBNnA1eEFZWmlG/bnJ4VmZ6ZzZ3RmVZ/Ync9" alt="Empty Cart" />
+        <h2>Your cart is empty!</h2>
+        <Button onClick={() => navigate('/')}>Continue Shopping</Button>
       </div>
     );
   }

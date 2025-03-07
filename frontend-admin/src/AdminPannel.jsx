@@ -56,7 +56,7 @@ export default function AdminPannel() {
   const handleLogout = () => {
    
     dispatch(logout());
-    navigate("/login")
+    navigate("/")
 
   };
 
